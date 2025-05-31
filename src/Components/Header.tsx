@@ -1,4 +1,11 @@
-export default function Header({ setToggle, toggle }: THeader) {
+import { useContext } from "react"
+import { ThemeContext } from "../pages/Layout"
+
+export default function Header() {
+
+    const { toggle, setToggle } = useContext(ThemeContext)
+
+
     return (
         <header className={`w-[100%] ${toggle ? "bg-[#FFFFFF]" : undefined} flex items-center shadow-[0_2px_4px_0_rgba(0,0,0,0.0562)] justify-center p-[22px] bg-[#2B3844]`}>
             <div className="flex justify-between w-[1280px]!">
