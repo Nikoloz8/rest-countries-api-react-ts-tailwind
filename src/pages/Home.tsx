@@ -1,7 +1,6 @@
-import { useState } from "react"
-// useContext
+import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
-// import { ThemeContext } from "./Layout"
+import { ThemeContext } from "./Layout"
 import data from "../../data.json"
 import tailwind from "../shared/tailwind"
 
@@ -13,7 +12,7 @@ export default function Home() {
   const [isFocused, setIsFocused] = useState(false)
   const [selectedRegion, setSelectedRegion] = useState("")
 
-  // const { toggle } = useContext(ThemeContext)
+  const { toggle } = useContext(ThemeContext)
 
   const regionArr = ["Africa", "Americas", "Asia", "Europe", "Oceania", "All"]
 
@@ -23,16 +22,16 @@ export default function Home() {
     <>
       <main className="pb-[70px] flex items-start justify-center gap-[70px] flex-wrap">
         <div className="flex mt-[75px]! w-[100%] justify-between  max-sm:flex-col max-sm:gap-[20px]">
-          <label htmlFor="search" className="shadow-[0_2px_4px_0_rgba(0,0,0,0,0.562)] max-lg:w-[300px]! flex pl-[32px]! items-center w-[480px] h-[56px] rounded-[5px] bg-[#2B3844] gap-[20px]">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path fill="none" stroke="#FFFFFF  " strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="m12.663 12.663 3.887 3.887M1 7.664a6.665 6.665 0 1 0 13.33 0 6.665 6.665 0 0 0-13.33 0Z" /></svg>
-            <input type="text" name="" className="outline-none text-[1.4rem] font-[400] leading-[20px] text-[#FFFFFF]" placeholder="Search for a country…" onChange={(e) => setInputValue(e.target.value)} id="search" />
+          <label htmlFor="search" className={`shadow-[0_2px_4px_0_rgba(0,0,0,0.562)] max-lg:w-[300px]! flex pl-[32px]! items-center w-[480px] h-[56px] rounded-[5px] bg-[#2B3844] gap-[20px] ${toggle ? "bg-[#FFFFFF]" : undefined}`}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path fill="none" stroke="#FFFFFF" className={`${toggle ? "stroke-[#848484]" : undefined}`} strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="m12.663 12.663 3.887 3.887M1 7.664a6.665 6.665 0 1 0 13.33 0 6.665 6.665 0 0 0-13.33 0Z" /></svg>
+            <input type="text" name="" className={`outline-none text-[1.4rem] font-[400] leading-[20px] text-[#FFFFFF] ${toggle ? "text-[#848484] placeholder:text-[#848484]" : undefined}`} placeholder="Search for a country…" onChange={(e) => setInputValue(e.target.value)} id="search" />
           </label>
-          <div className="shadow-[0_2px_4px_0_rgba(0,0,0,0,0.562)] relative flex gap-[24px] items-center">
-            <div onClick={() => setIsFocused(!isFocused)} className='cursor-pointer flex justify-between w-[200px] h-[56px] bg-[#2B3844] p-[0_20px_0_20px] rounded-[5px] items-center'>
-              <button className={`text-[1.4rem] font-[400] leading-[20px] text-[#FFFFFF]`} >{selectedRegion ? selectedRegion : "Filter by Region"}</button>
-              <svg className={`cursor-pointer transition-[1s] ${isFocused ? "rotate-180" : "rotate-0"}`} xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8"><path fill="none" stroke="#FFFFFF" strokeWidth="1.5" d="m1 1 6 6 6-6" /></svg>
+          <div className="shadow-[0_2px_4px_0_rgba(0,0,0,0.562)] relative flex gap-[24px] rounded-[5px]! items-center">
+            <div onClick={() => setIsFocused(!isFocused)} className={`cursor-pointer flex justify-between w-[200px] h-[56px] bg-[#2B3844] p-[0_20px_0_20px] rounded-[10px]! items-center ${toggle ? "bg-[#FFFFFF]" : undefined}`}>
+              <button className={`text-[1.4rem] font-[400] ${toggle ? "text-[#111517]!" : undefined} leading-[20px] text-[#FFFFFF]`} >{selectedRegion ? selectedRegion : "Filter by Region"}</button>
+              <svg className={`cursor-pointer transition-[1s]   ${isFocused ? "rotate-180" : "rotate-0"}`} xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8"><path fill="none" stroke="#FFFFFF" className={`${toggle ? "stroke-[#111517]!" : undefined}`} strokeWidth="1.5" d="m1 1 6 6 6-6" /></svg>
             </div>
-            <div className={`flex-col absolute p-[24px]! gap-[10px] top-[64px] bg-[#2B3844] rounded-[5px] shadow-[0_2px_9px_0_rgba(0,0,0,0.0532)] w-[200px]! text-[1.4rem] font-[400] leading-[20px] text-[#FFFFFF] ${isFocused ? "flex" : "hidden"} `}>
+            <div className={`flex-col absolute p-[24px]! gap-[10px] top-[64px] bg-[#2B3844] rounded-[5px] shadow-[0_2px_9px_0_rgba(0,0,0,0.532)] w-[200px]! text-[1.4rem] font-[400] leading-[20px] text-[#FFFFFF] ${isFocused ? "flex" : "hidden"} `}>
               {regionArr.map((e, index) => {
                 return <button key={index} onClick={() => {
                   setIsFocused(false)
@@ -50,14 +49,14 @@ export default function Home() {
           return matchesName && matchesRegion
 
         }).map((e, index) => {
-          return <div key={index} onClick={() => navigate(`/details/${e.name.toLowerCase()}`)} className="bg-[#2B3844] max-sm:w-[300px]! w-[264px] h-[336px] rounded-[5px]">
+          return <div key={index} onClick={() => navigate(`/details/${e.name.toLowerCase()}`)} className={`bg-[#2B3844] shadow-[0_0_7px_2px_rgba(0,0,0,0.0294)] max-sm:w-[300px]! w-[264px] h-[336px] rounded-[5px] ${toggle? "bg-[#FFFFFF]!"  : undefined}`}>
             <img className="w-[100%] rounded-t-[5px] h-[48%]" src={e.flags.png} alt="" />
             <div className="p-[24px]">
-              <h2 className="mb-[16px]! font-[900] text-[1.8rem] leading-[26px] text-[#FFFFFF]">{e.name}</h2>
+              <h2 className={`mb-[16px]! font-[900] text-[1.8rem] leading-[26px] text-[#FFFFFF] ${toggle ? "text-[#111517]!" : undefined}`}>{e.name}</h2>
               <div className="flex flex-col gap-[8px]">
-                <h3 className={`${H3}`}>Population: <span className={`${H3} font-[300]!`}>{e.population.toLocaleString()}</span></h3>
-                <h3 className={`${H3}`}>Region: <span className={`${H3} font-[300]!`}>{e.region}</span></h3>
-                <h3 className={`${H3}`}>Capital: <span className={`${H3} font-[300]!`}>{e.capital}</span></h3>
+                <h3 className={`${H3} ${toggle ? "text-[#111517]!" : undefined}`}>Population: <span className={`${H3} font-[300]! ${toggle ? "text-[#111517]!" : undefined}`}>{e.population.toLocaleString()}</span></h3>
+                <h3 className={`${H3} ${toggle ? "text-[#111517]!" : undefined}`}>Region: <span className={`${H3} font-[300]! ${toggle ? "text-[#111517]!" : undefined}`}>{e.region}</span></h3>
+                <h3 className={`${H3} ${toggle ? "text-[#111517]!" : undefined}`}>Capital: <span className={`${H3} font-[300]! ${toggle ? "text-[#111517]!" : undefined}`}>{e.capital}</span></h3>
               </div>
             </div>
           </div>
