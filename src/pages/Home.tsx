@@ -1,12 +1,13 @@
-import { useContext, useState } from "react"
+import { useState } from "react"
+// useContext
 import { useNavigate } from "react-router-dom"
-import { ThemeContext } from "./Layout"
+// import { ThemeContext } from "./Layout"
 import data from "../../data.json"
 import tailwind from "../shared/tailwind"
 
 export default function Home() {
 
-  const {H3} = tailwind()
+  const { H3 } = tailwind()
 
   const [inputValue, setInputValue] = useState("")
   const [isFocused, setIsFocused] = useState(false)
