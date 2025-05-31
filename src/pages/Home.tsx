@@ -12,8 +12,8 @@ export default function Home() {
   const [isFocused, setIsFocused] = useState(false)
   const [selectedRegion, setSelectedRegion] = useState("")
 
-  const { toggle } = useContext(ThemeContext)
-  
+  // const { toggle } = useContext(ThemeContext)
+
   const regionArr = ["Africa", "Americas", "Asia", "Europe", "Oceania", "All"]
 
   const navigate = useNavigate()
