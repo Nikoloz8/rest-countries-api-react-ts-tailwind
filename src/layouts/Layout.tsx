@@ -26,7 +26,7 @@ export default function Layout() {
     const [selectedRegion, setSelectedRegion] = useState("")
 
     useEffect(() => {
-        navigate("/home")
+        navigate("/")
     }, [])
 
 

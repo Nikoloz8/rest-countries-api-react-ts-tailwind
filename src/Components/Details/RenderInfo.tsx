@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { ThemeContext } from "../../pages/Layout"
+import { ThemeContext } from "../../layouts/Layout"
 import data from "../../../data.json"
 import { useParams } from "react-router-dom"
 

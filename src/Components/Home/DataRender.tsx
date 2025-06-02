@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import data from "../../../data.json"
-import { ThemeContext } from "../../pages/Layout"
+import { ThemeContext } from "../../layouts/Layout"
 import tailwind from "../../shared/tailwind"
 
 export default function DataRender() {
